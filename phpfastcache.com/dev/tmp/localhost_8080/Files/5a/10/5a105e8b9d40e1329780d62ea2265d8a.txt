@@ -1,0 +1,1 @@
+a:5:{s:1:"d";a:3:{i:0;a:2:{s:5:"score";s:3:"0.5";s:4:"data";s:13:"TesteFernando";}i:1;a:2:{s:5:"score";s:1:"1";s:4:"data";s:8:"Fernando";}i:2;a:2:{s:5:"score";s:2:"45";s:4:"data";s:9:"Fernando2";}}s:1:"g";a:1:{i:0;s:3:"set";}s:1:"e";O:8:"DateTime":3:{s:4:"date";s:26:"2020-05-24 23:52:36.996566";s:13:"timezone_type";i:3;s:8:"timezone";s:3:"UTC";}s:1:"m";N;s:1:"c";N;}
