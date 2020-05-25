@@ -10,12 +10,10 @@ use App\Application\Actions\Set\ZAddAction;
 use App\Application\Actions\Set\ZCardAction;
 use App\Application\Actions\Set\ZRangeAction;
 use App\Application\Actions\Set\ZRankAction;
-use Firebase\JWT\JWT;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use \App\Application\Actions\Set\SetAction;
-use Tuupola\Base62;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
