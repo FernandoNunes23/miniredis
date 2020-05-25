@@ -7,6 +7,10 @@ use Symfony\Component\Console\Application;
 $application = new Application();
 $client = new \App\Client\Connection();
 
+$application->add(new \App\Application\Console\Command\Set\ZAddCommand($client));
+$application->add(new \App\Application\Console\Command\Set\ZCardCommand($client));
+$application->add(new \App\Application\Console\Command\Set\ZRangeCommand($client));
+$application->add(new \App\Application\Console\Command\Set\ZRankCommand($client));
 $application->add(new \App\Application\Console\Command\Set\SetCommand($client));
 $application->add(new \App\Application\Console\Command\Set\GetCommand($client));
 $application->add(new \App\Application\Console\Command\Set\DeleteCommand($client));
