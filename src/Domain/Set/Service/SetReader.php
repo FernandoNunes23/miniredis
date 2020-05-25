@@ -30,9 +30,7 @@ final class SetReader
      * @param string $key
      *
      * @return SetData|null
-     *
-     * @throws \Phpfastcache\Exceptions\PhpfastcacheSimpleCacheException
-     * @throws \Psr\Cache\InvalidArgumentExceptionint
+     * @throws \Phpfastcache\Exceptions\PhpfastcacheInvalidArgumentException
      */
     public function getSetDetailsByKey(string $key): ?SetData
     {
@@ -106,7 +104,8 @@ final class SetReader
      * @param int $start
      * @param int $stop
      *
-     * @return array
+     * @return array|string
+     * @throws \Phpfastcache\Exceptions\PhpfastcacheInvalidArgumentException
      */
     public function getZRangeByKey(string $key, int $start, int $stop)
     {
@@ -115,6 +114,29 @@ final class SetReader
 
         if (!$item->isHit()) {
             return 'nil';
+        }
+
+        $numberOfMembers = count($item->get());
+
+        if ($start < 0) {
+            $start = $numberOfMembers + $start;
+        }
+
+        if ($stop < 0) {
+            $stop = $numberOfMembers + $stop;
+        }
+
+        if ($start > $stop || $start > ($numberOfMembers - 1)) {
+            return [];
+        }
+
+        if ($stop > ($numberOfMembers - 1)) {
+            $stop = $numberOfMembers - 1;
+        }
+
+        foreach (range($start, $stop) as $i)
+        {
+            $members[] = $item->get()[$i];
         }
 
         return $members;

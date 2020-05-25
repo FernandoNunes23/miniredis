@@ -27,9 +27,9 @@ final class ZRangeAction extends Action
 
     protected function action(): Response
     {
-        $key = (string) $this->resolveArg('key');
-        $start = 0;
-        $stop  = 5;
+        $key   = (string) $this->resolveArg('key');
+        $start = (int) $this->request->getQueryParams()['start'];
+        $stop  = (int) $this->request->getQueryParams()['stop'];
 
         $members = $this->setReader->getZRangeByKey($key, $start, $stop);
 
