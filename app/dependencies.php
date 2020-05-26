@@ -32,7 +32,8 @@ return function (ContainerBuilder $containerBuilder) {
             // Please note that as of the V6.1 the "path" config
             // can also be used for Unix sockets (Redis, Memcache, etc)
             CacheManager::setDefaultConfig(new ConfigurationOption([
-                'path' => '/var/www/var/cache/dev/tmp', // or in windows "C:/tmp/"
+                'path'       => '/var/www/var/cache/dev/tmp',
+                'defaultTtl' => 86400,
             ]));
 
             // In your class, function, you can call the Cache

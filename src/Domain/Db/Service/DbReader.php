@@ -11,7 +11,7 @@ use Phpfastcache\Drivers\Files\Driver;
  *
  * @package App\Domain\Db\Service
  */
-final class DbReader
+class DbReader
 {
     /** @var Driver */
     private $cacheManager;

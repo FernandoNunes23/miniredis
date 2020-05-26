@@ -69,6 +69,10 @@ final class SetCommand extends Command
             $return = "OK";
         }
 
+        if ($response->getStatusCode() == 401) {
+            $return = "Need to authenticate.";
+        }
+
         $output->writeln($return);
 
         return 0;

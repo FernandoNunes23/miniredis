@@ -63,6 +63,10 @@ final class ZRangeCommand extends Command
             $return = $responseData["data"];
         }
 
+        if ($response->getStatusCode() == 401) {
+            $return = "Need to authenticate.";
+        }
+
         if (is_array($return)) {
             foreach ($return as $member) {
                 $output->writeln($member["data"]);

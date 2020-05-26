@@ -57,6 +57,10 @@ final class GetCommand extends Command
             $return = $responseData["data"]["members"][0]["data"];
         }
 
+        if ($response->getStatusCode() == 401) {
+            $return = "Need to authenticate.";
+        }
+
         $output->writeln($return);
 
         return 0;

@@ -56,6 +56,10 @@ final class ZCardCommand extends Command
             $return = $responseData["data"];
         }
 
+        if ($response->getStatusCode() == 401) {
+            $return = "Need to authenticate.";
+        }
+
         $output->writeln($return);
 
         return 0;

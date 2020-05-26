@@ -35,20 +35,12 @@ class TestCase extends PHPUnit_TestCase
         $dependencies = require __DIR__ . '/../app/dependencies.php';
         $dependencies($containerBuilder);
 
-        // Set up repositories
-        $repositories = require __DIR__ . '/../app/repositories.php';
-        $repositories($containerBuilder);
-
         // Build PHP-DI Container instance
         $container = $containerBuilder->build();
 
         // Instantiate the app
         AppFactory::setContainer($container);
         $app = AppFactory::create();
-
-        // Register middleware
-        $middleware = require __DIR__ . '/../app/middleware.php';
-        $middleware($app);
 
         // Register routes
         $routes = require __DIR__ . '/../app/routes.php';
@@ -70,7 +62,8 @@ class TestCase extends PHPUnit_TestCase
         string $path,
         array $headers = ['HTTP_ACCEPT' => 'application/json'],
         array $cookies = [],
-        array $serverParams = []
+        array $serverParams = [],
+        array $queryParams = []
     ): Request {
         $uri = new Uri('', '', 80, $path);
         $handle = fopen('php://temp', 'w+');
@@ -81,6 +74,12 @@ class TestCase extends PHPUnit_TestCase
             $h->addHeader($name, $value);
         }
 
-        return new SlimRequest($method, $uri, $h, $cookies, $serverParams, $stream);
+        $request = new SlimRequest($method, $uri, $h, $cookies, $serverParams, $stream);
+
+        if (!empty($queryParams)) {
+            $request = $request->withQueryParams($queryParams);
+        }
+
+        return $request;
     }
 }
